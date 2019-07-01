@@ -1,0 +1,26 @@
+//Component will not have state, so can just be a functional component
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { signOut } from '../../store/actions/authActions';
+import { connect } from 'react-redux';
+
+const SignedInLinks = (props) => {
+    return (
+        <ul className="right">
+            {/*<li><NavLink to='/'>My Projects</NavLink></li>*/}
+            <li><NavLink to='/create/project'>Create Project</NavLink></li>
+            <li><a onClick={props.signOut}>Log Out</a></li>
+            <li><NavLink to='/' className="btn btn-floating green lighten-1 white-text">
+                { props.profile.initial }
+            </NavLink></li>
+        </ul>
+    )
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch(signOut())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignedInLinks);
